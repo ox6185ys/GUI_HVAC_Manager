@@ -27,6 +27,13 @@ public class GUI_Service_Call_Manager extends JFrame{
     private JLabel taskSelectionLabel;
     private JLabel modelOrAgeOfHeaterLabel;
     private JButton addingServiceCallButton;
+    private JButton resolveTicketButton;
+    private JTextField resolutionDescriptionTextField;
+    private JTextField feeChargedTextField;
+    private JLabel feeChargedJLabel;
+    private JLabel resolutionDescriptionLabel;
+    private JScrollPane resolvedServiceCallsScrollPane;
+    private JList resolvedServiceCallsDisplayJList;
 
     DefaultListModel<Furnace> furnaceListModel;
     DefaultListModel<CentralAC> centralACListModel;
@@ -49,6 +56,11 @@ public class GUI_Service_Call_Manager extends JFrame{
         //TODO here should be where the list shows its data ina  meaninful way.  Might have to make 3 seperate lists.
         openServiceCallsDisplayJList.setModel(serviceCallListModel);
 //Here I set various elements to non-visible until selections are made.
+        feeChargedJLabel.setVisible(false);
+        feeChargedTextField.setVisible(false);
+        resolutionDescriptionLabel.setVisible(false);
+        resolutionDescriptionTextField.setVisible(false);
+        resolveTicketButton.setVisible(false);
         callTypeComboBox.setVisible(false);
         callAddressLabel.setVisible(false);
         callAddressLabel.setVisible(false);
@@ -101,11 +113,26 @@ public class GUI_Service_Call_Manager extends JFrame{
                 if(selectTaskComboBox.getSelectedItem().equals(NEW_SERVICE_CALL)){
                     callTypeComboBox.setVisible(true);
                     serviceCallTypeLabel.setVisible(true);
+                    feeChargedTextField.setVisible(false);
+                    feeChargedJLabel.setVisible(false);
+                    resolutionDescriptionTextField.setVisible(false);
+                    resolveTicketButton.setVisible(false);
+                    resolutionDescriptionLabel.setVisible(false);
                 }else if(selectTaskComboBox.getSelectedItem().equals(EMPTY_SELECTION)){
                     callTypeComboBox.setVisible(false);
                     serviceCallTypeLabel.setVisible(false);
+                    feeChargedTextField.setVisible(false);
+                    feeChargedJLabel.setVisible(false);
+                    resolutionDescriptionTextField.setVisible(false);
+                    resolveTicketButton.setVisible(false);
+                    resolutionDescriptionLabel.setVisible(false);
                 }else if(selectTaskComboBox.getSelectedItem().equals(RESOLVE_SERVICE_CALL)){
                     System.out.println("Resolve Selected");
+                    feeChargedTextField.setVisible(true);
+                    feeChargedJLabel.setVisible(true);
+                    resolutionDescriptionTextField.setVisible(true);
+                    resolveTicketButton.setVisible(true);
+                    resolutionDescriptionLabel.setVisible(true);
                 }else if(selectTaskComboBox.getSelectedItem().equals(DELETE_A_CALL)){
                     System.out.println("Delete A Call Selected");
                 }
@@ -185,7 +212,7 @@ public class GUI_Service_Call_Manager extends JFrame{
         addingServiceCallButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               //if one of the fiels is empty, display the error.
+               //if one of the fields is empty, display the error.
                 if (callDescriptionTextField.getText().equals("")||callAddressTextField.getText().equals("")){
                     JOptionPane.showMessageDialog(GUI_Service_Call_Manager.this,"Please fill in all fields before\n adding the service call to the queue.");
                 }else{
@@ -233,6 +260,21 @@ public class GUI_Service_Call_Manager extends JFrame{
                     modelTypeORAgeOfHeaterTextField.setText("");
                 }
             }
+        });
+        resolveTicketButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!feeChargedTextField.getText().equals("")||!resolutionDescriptionTextField.getText().equals("")){
+                    JOptionPane.showMessageDialog(GUI_Service_Call_Manager.this,"Please fill in all fields before\n resolving a ticket from the queue.");
+                }else {
+                    Date date= new Date();
+                    ServiceCall toResolve = GUI_Service_Call_Manager.this.openServiceCallsDisplayJList.getSelectedValue();
+                    toResolve.setFee(Double.parseDouble(feeChargedTextField.getText()));
+                    toResolve.setProblemDescription(resolutionDescriptionTextField.getText());
+                    toResolve.setResolvedDate(date);
+                    //TODO set up so this adds the sleted one to the new JLIST resolved stuff. You have to set that all up too
+                }
+                }
         });
     }
 
