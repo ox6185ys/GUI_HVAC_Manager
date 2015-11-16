@@ -264,7 +264,7 @@ public class GUI_Service_Call_Manager extends JFrame{
         resolveTicketButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!feeChargedTextField.getText().equals("")||!resolutionDescriptionTextField.getText().equals("")){
+                if(feeChargedTextField.getText().equals("")||resolutionDescriptionTextField.getText().equals("")){
                     JOptionPane.showMessageDialog(GUI_Service_Call_Manager.this,"Please fill in all fields before\n resolving a ticket from the queue.");
                 }else {
                     Date date= new Date();
