@@ -145,6 +145,7 @@ public class GUI_Service_Call_Manager extends JFrame{
         callTypeComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Set certain things to visible, others to invisible when this is selected
                 if(callTypeComboBox.getSelectedItem().equals(EMPTY_SELECTION_FOR_CALL_TYPE)){
                     furnaceTypeDropDownLabel.setVisible(false);
                     ifFurnaceSelectedComboBox.setVisible(false);
@@ -161,7 +162,7 @@ public class GUI_Service_Call_Manager extends JFrame{
                     addingServiceCallButton.setVisible(false);
 
                 }else if(callTypeComboBox.getSelectedItem().equals(FURNACE)){
-
+//Set certain things to visible, others to invisible when this is selected
                     furnaceTypeDropDownLabel.setVisible(true);
                     ifFurnaceSelectedComboBox.setVisible(true);
                     //Show Address label and text box when this one is selected
@@ -177,7 +178,7 @@ public class GUI_Service_Call_Manager extends JFrame{
                     addingServiceCallButton.setVisible(true);
 
                 }else if(callTypeComboBox.getSelectedItem().equals(CENTRAL_AC)){
-
+//Set certain things to visible, others to invisible when this is selected
                     modelTypeORAgeOfHeaterTextField.setVisible(true);
                     modelOrAgeOfHeaterLabel.setVisible(true);
                     modelOrAgeOfHeaterLabel.setText(" Model Number of Unit : ");
@@ -194,7 +195,7 @@ public class GUI_Service_Call_Manager extends JFrame{
                     addingServiceCallButton.setVisible(true);
 
                 }else if (callTypeComboBox.getSelectedItem().equals(WATER_HEATER)){
-
+//Set certain things to visible, others to invisible when this is selected
                     modelTypeORAgeOfHeaterTextField.setVisible(true);
                     modelOrAgeOfHeaterLabel.setVisible(true);
                     modelOrAgeOfHeaterLabel.setText(" Age of Water Heater : ");
@@ -257,6 +258,7 @@ public class GUI_Service_Call_Manager extends JFrame{
                         System.out.println("I made a Water heater Call");
 
                     }
+                    //reset the menu to the unselected mode
                     selectTaskComboBox.setSelectedItem(EMPTY_SELECTION);
                     callTypeComboBox.setSelectedItem(EMPTY_SELECTION_FOR_CALL_TYPE);
                     callAddressTextField.setText("");
@@ -269,6 +271,7 @@ public class GUI_Service_Call_Manager extends JFrame{
         resolveTicketButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //This button takes the selection and resolves it as long as the fields are all filled in. Otherwise display the error
                 if(feeChargedTextField.getText().equals("")||resolutionDescriptionTextField.getText().equals("")){
                     JOptionPane.showMessageDialog(GUI_Service_Call_Manager.this,"Please fill in all fields before\n resolving a ticket from the queue.");
                 }else {
@@ -279,7 +282,7 @@ public class GUI_Service_Call_Manager extends JFrame{
                     toResolve.setResolvedDate(date);
                     GUI_Service_Call_Manager.this.resolvedServiceCallListModel.addElement(toResolve);
                     GUI_Service_Call_Manager.this.serviceCallListModel.removeElement(toResolve);
-                    //TODO set up so this adds the sleted one to the new JLIST resolved stuff. You have to set that all up too
+                    //
                 }
                 }
         });
