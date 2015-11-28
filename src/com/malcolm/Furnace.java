@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 
 public class Furnace extends ServiceCall {
-
+    private boolean wasResolved=false;
     private int furnaceType;
 
     public Furnace(String serviceAddress, String problemDescription, Date date, int furnaceType) {

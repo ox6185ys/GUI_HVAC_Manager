@@ -33,12 +33,13 @@ public class GUI_Service_Call_Manager extends JFrame{
     private JLabel feeChargedJLabel;
     private JLabel resolutionDescriptionLabel;
     private JScrollPane resolvedServiceCallsScrollPane;
-    private JList resolvedServiceCallsDisplayJList;
+    private JList<ServiceCall> resolvedServiceCallsDisplayJList;
 
     DefaultListModel<Furnace> furnaceListModel;
     DefaultListModel<CentralAC> centralACListModel;
     DefaultListModel<WaterHeater>waterHeaterListModel;
     DefaultListModel<ServiceCall>serviceCallListModel;
+    DefaultListModel<ServiceCall>resolvedServiceCallListModel;
 
     public GUI_Service_Call_Manager(){
 
@@ -52,9 +53,12 @@ public class GUI_Service_Call_Manager extends JFrame{
         centralACListModel=new DefaultListModel<CentralAC>();
         waterHeaterListModel=new DefaultListModel<WaterHeater>();
         serviceCallListModel=new DefaultListModel<ServiceCall>();
+        resolvedServiceCallListModel=new DefaultListModel<ServiceCall>();
         openServiceCallsDisplayJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        resolvedServiceCallsDisplayJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         //TODO here should be where the list shows its data ina  meaninful way.  Might have to make 3 seperate lists.
         openServiceCallsDisplayJList.setModel(serviceCallListModel);
+        resolvedServiceCallsDisplayJList.setModel(resolvedServiceCallListModel);
 //Here I set various elements to non-visible until selections are made.
         feeChargedJLabel.setVisible(false);
         feeChargedTextField.setVisible(false);
@@ -251,6 +255,7 @@ public class GUI_Service_Call_Manager extends JFrame{
                         WaterHeater waterHeaterCall=new WaterHeater(serviceAddress,callDescription,date,ageOfHeater);
                         GUI_Service_Call_Manager.this.serviceCallListModel.addElement(waterHeaterCall);
                         System.out.println("I made a Water heater Call");
+
                     }
                     selectTaskComboBox.setSelectedItem(EMPTY_SELECTION);
                     callTypeComboBox.setSelectedItem(EMPTY_SELECTION_FOR_CALL_TYPE);
@@ -272,6 +277,8 @@ public class GUI_Service_Call_Manager extends JFrame{
                     toResolve.setFee(Double.parseDouble(feeChargedTextField.getText()));
                     toResolve.setProblemDescription(resolutionDescriptionTextField.getText());
                     toResolve.setResolvedDate(date);
+                    GUI_Service_Call_Manager.this.resolvedServiceCallListModel.addElement(toResolve);
+                    GUI_Service_Call_Manager.this.serviceCallListModel.removeElement(toResolve);
                     //TODO set up so this adds the sleted one to the new JLIST resolved stuff. You have to set that all up too
                 }
                 }
