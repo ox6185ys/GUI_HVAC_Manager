@@ -1,14 +1,11 @@
-package com.malcolm;
+package com.patrick;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
-import java.util.List;
 
-/**
- * Created by Malcolm on 11/15/2015.
- */
+
 public class GUI_Service_Call_Manager extends JFrame{
     private JScrollPane openCallsScrollPane;
     private JList<ServiceCall> openServiceCallsDisplayJList;

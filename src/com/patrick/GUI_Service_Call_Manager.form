@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.malcolm.GUI_Service_Call_Manager">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.patrick.GUI_Service_Call_Manager">
   <grid id="27dc6" binding="rootPanel" layout-manager="GridBagLayout">
     <constraints>
       <xy x="20" y="20" width="560" height="404"/>
